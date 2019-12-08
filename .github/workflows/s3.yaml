@@ -67,7 +67,7 @@ jobs:
           # push it to ECR so that it can
           # be deployed to ECS.
             #docker run my-static-website-test
-            docker build --f "../../Dockerfile" -t aws:latest "."
+            docker build -f "../../Dockerfile" -t aws:latest "."
             bash ../../deploy.sh
         #   docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         #   docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
