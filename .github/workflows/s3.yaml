@@ -28,10 +28,8 @@ on:
     push:
       branches:
         - master
-  
-  name: Deploy to Amazon ECS
-  
-  jobs:
+    
+jobs:
     deploy:
       name: Deploy
       runs-on: ubuntu-latest
