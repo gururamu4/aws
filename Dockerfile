@@ -7,6 +7,10 @@ WORKDIR "/my-static-app"
 #Copying our package.json file from our local machine to the working directory inside the docker container.
 COPY package.json ./
 
+ENV AWSCLI_VERSION='1.16.265'
+
+RUN pip install --quiet --no-cache-dir awscli==${AWSCLI_VERSION}
+
 #Installing the dependencies listed in our package.json file.
 RUN npm install
 
