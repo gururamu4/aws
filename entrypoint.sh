@@ -1,5 +1,3 @@
-#!/bin/bash
-
 set -e
 
 if [ -z "$AWS_S3_BUCKET" ]; then
