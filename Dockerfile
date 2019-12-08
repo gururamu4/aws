@@ -34,4 +34,8 @@ CMD ["/bin/bash"]
 # RUN apt-get update \
 #     && apt-get install -y --no-install-recommends build-essential
 
-ENTRYPOINT ["sh", "/entrypoint.sh"]
+# ENTRYPOINT ["sh", "/entrypoint.sh"]
+COPY entrypoint.sh /entrypoint.sh
+
+# Code file to execute when the docker container starts up (`entrypoint.sh`)
+ENTRYPOINT ["/entrypoint.sh"]
