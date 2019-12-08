@@ -20,10 +20,10 @@ RUN npm run build
 FROM mesosphere/aws-cli
 
 #Using the alias defined for the first container, copy the contents of the build folder to this container
-COPY --from=builder /my-static-app/build .
+COPY --from=builder /my-static-app/dist .
 
 #Set the default command of this container to push the files from the working directory of this container to our s3 bucket 
-CMD ["s3", "sync", "./", "s3://static-serve-react-test"]   
+CMD ["s3", "sync", "./", "http://as-app.s3-website-us-east-1.amazonaws.com"]   
 
 COPY entrypoint.sh /deploy.sh
 
