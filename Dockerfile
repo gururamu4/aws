@@ -25,7 +25,7 @@ COPY --from=builder /my-static-app/dist .
 #Set the default command of this container to push the files from the working directory of this container to our s3 bucket 
 CMD ["s3", "sync", "./", "http://as-app.s3-website-us-east-1.amazonaws.com"]   
 
-COPY deploy.sh /deploy.sh
+COPY entrypoint.sh /entrypoint.sh
 
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
-ENTRYPOINT ["/deploy.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
