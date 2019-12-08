@@ -39,7 +39,7 @@ EOF
 
 # Sync using our dedicated profile and suppress verbose messages.
 # All other flags are optional via the `args:` directive.
-sh -c "aws s3 cp ${SOURCE_DIR:-.} s3://as-app --recursive --acl public-read\
+sh -c "aws s3 cp /my-static-app/dist . s3://as-app --recursive --acl public-read\
               --profile s3-sync-action \
               --no-progress \
               ${ENDPOINT_APPEND} $*"
