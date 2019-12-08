@@ -32,8 +32,8 @@ COPY --from=builder /my-static-app/dist .
 FROM python:3.7-alpine
 
 ENV AWSCLI_VERSION='1.16.265'
-RUN ["chmod", "+x", "entrypoint.sh"]
 RUN pip install --quiet --no-cache-dir awscli==${AWSCLI_VERSION}
+RUN chmod +x entrypoint.sh
 ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
