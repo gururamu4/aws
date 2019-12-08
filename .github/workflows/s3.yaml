@@ -61,13 +61,14 @@ jobs:
             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
-            # SOURCE_DIR: 'node /app/dist'  
+            # SOURCE_DIR: 'node /app/dist' 
+            IMAGE_TAG: 's3'   
         run: |
           # Build a docker container and
           # push it to ECR so that it can
           # be deployed to ECS.
             #docker run my-static-website-test
-            docker build -f "../../Dockerfile" -t aws:latest "."
+            docker build -t $IMAGE_TAG .
             bash ../../deploy.sh
         #   docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         #   docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
