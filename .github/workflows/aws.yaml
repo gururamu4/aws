@@ -29,9 +29,8 @@ on:
       branches:
         - master
   
-  name: Deploy to Amazon ECS
-  
-  jobs:
+name: Deploy to Amazon ECS 
+jobs:
     deploy:
       name: Deploy
       runs-on: ubuntu-latest
