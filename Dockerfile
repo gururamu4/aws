@@ -1,20 +1,4 @@
-FROM nginx:alpine
-COPY --from=node /app/dist/aws-app /usr/share/nginx/html
- 
-FROM python:3.7-alpine
-
-LABEL "com.github.actions.name"="S3 Sync"
-LABEL "com.github.actions.description"="Sync a directory to an AWS S3 repository"
-LABEL "com.github.actions.icon"="refresh-cw"
-LABEL "com.github.actions.color"="green"
-
-LABEL version="0.5.0"
-LABEL repository="https://github.com/jakejarvis/s3-sync-action"
-LABEL homepage="https://jarv.is/"
-LABEL maintainer="Jake Jarvis <jake@jarv.is>"
-
-# https://github.com/aws/aws-cli/blob/master/CHANGELOG.rst
-ENV AWSCLI_VERSION='1.16.265'
+#Create an alias for the container built from the node:alpine base image
 FROM node:alpine as builder
 
 #Setting the working directory inside the container to be the same name as our app on our local machine.
@@ -22,6 +6,7 @@ WORKDIR "/my-static-app"
 
 #Copying our package.json file from our local machine to the working directory inside the docker container.
 COPY package.json ./
+
 #Installing the dependencies listed in our package.json file.
 RUN npm install
 
@@ -36,10 +21,6 @@ FROM mesosphere/aws-cli
 
 #Using the alias defined for the first container, copy the contents of the build folder to this container
 COPY --from=builder /my-static-app/dist .
-
-RUN pip install --quiet --no-cache-dir awscli==${AWSCLI_VERSION}
-#Create an alias for the container built from the node:alpine base image
-
 
 #Set the default command of this container to push the files from the working directory of this container to our s3 bucket 
 # CMD ["s3", "sync", "./", "http://as-app.s3-website-us-east-1.amazonaws.com"]   
