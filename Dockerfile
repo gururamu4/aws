@@ -1,3 +1,12 @@
+FROM python:3.7-alpine
+
+# https://github.com/aws/aws-cli/blob/master/CHANGELOG.rst
+ENV AWSCLI_VERSION='1.16.265'
+
+RUN pip install --quiet --no-cache-dir awscli==${AWSCLI_VERSION}
+RUN npm install
+RUN npm install @angular/cli -g
+
 #Create an alias for the container built from the node:alpine base image
 FROM node:alpine as builder
 
@@ -9,18 +18,6 @@ COPY package.json ./
 
 #Installing the dependencies listed in our package.json file.
 RUN npm install
-
-RUN apk update && apk add && apt-get update && \
-    apt-get install -y \
-        python \
-        python-dev \
-        python-pip \
-        python-setuptools \
-        groff \
-        less \
-    && pip install --upgrade awscli \
-    && apt-get clean
-
 
 #Copying our project files from our local machine to the working directory in our container.
 COPY . .
@@ -40,6 +37,5 @@ CMD ["/bin/bash"]
 # RUN apt-get update \
 #     && apt-get install -y --no-install-recommends build-essential
 
-COPY entrypoint.sh /usr/local/bin/
-RUN ln -s /usr/local/bin/entrypoint.sh / # backwards compat
-ENTRYPOINT ["entrypoint.sh"]
+ADD entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
