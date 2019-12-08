@@ -39,7 +39,7 @@ EOF
 
 # Sync using our dedicated profile and suppress verbose messages.
 # All other flags are optional via the `args:` directive.
-sh -c "aws s3 sync /my-static-app/dist . s3://${AWS_S3_BUCKET}/${DEST_DIR} \
+sh -c "aws s3 sync /my-static-app/dist . s3://${AWS_S3_BUCKET} \
               --profile s3-sync-action \
               --no-progress \
               ${ENDPOINT_APPEND} $*"
