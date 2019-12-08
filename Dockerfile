@@ -10,6 +10,18 @@ COPY package.json ./
 #Installing the dependencies listed in our package.json file.
 RUN npm install
 
+RUN apt-get update && \
+    apt-get install -y \
+        python \
+        python-dev \
+        python-pip \
+        python-setuptools \
+        groff \
+        less \
+    && pip install --upgrade awscli \
+    && apt-get clean
+
+
 #Copying our project files from our local machine to the working directory in our container.
 COPY . .
 
@@ -24,7 +36,7 @@ COPY --from=builder /my-static-app/dist .
 
 #Set the default command of this container to push the files from the working directory of this container to our s3 bucket 
 # CMD ["s3", "sync", "./", "http://as-app.s3-website-us-east-1.amazonaws.com"]   
-
+CMD ["/bin/bash"]
 # RUN apt-get update \
 #     && apt-get install -y --no-install-recommends build-essential
 
