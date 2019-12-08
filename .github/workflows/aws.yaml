@@ -9,7 +9,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - shell: sh
     - uses: actions/checkout@master
     - uses: ./
       with:
