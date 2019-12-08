@@ -4,9 +4,6 @@ FROM python:3.7-alpine
 ENV AWSCLI_VERSION='1.16.265'
 
 RUN pip install --quiet --no-cache-dir awscli==${AWSCLI_VERSION}
-RUN npm install
-RUN npm install @angular/cli -g
-
 #Create an alias for the container built from the node:alpine base image
 FROM node:alpine as builder
 
