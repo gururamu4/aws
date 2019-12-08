@@ -35,6 +35,5 @@ ENV AWSCLI_VERSION='1.16.265'
 RUN pip install --quiet --no-cache-dir awscli==${AWSCLI_VERSION}
 COPY entrypoint.sh ./
 RUN ["chmod", "+x", "/entrypoint.sh"]
-RUN ["chmod", "+x", "/usr/bin/foxx"]
 ENTRYPOINT ["/entrypoint.sh"]
 
