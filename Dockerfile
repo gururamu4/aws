@@ -1,9 +1,3 @@
-FROM python:3.7-alpine
-
-# https://github.com/aws/aws-cli/blob/master/CHANGELOG.rst
-ENV AWSCLI_VERSION='1.16.265'
-
-RUN pip install --quiet --no-cache-dir awscli==${AWSCLI_VERSION}
 #Create an alias for the container built from the node:alpine base image
 FROM node:alpine as builder
 
@@ -32,12 +26,14 @@ COPY --from=builder /my-static-app/dist .
 
 #Set the default command of this container to push the files from the working directory of this container to our s3 bucket 
 # CMD ["s3", "sync", "./", "http://as-app.s3-website-us-east-1.amazonaws.com"]   
-CMD ["/entrypoint.sh"]
 # RUN apt-get update \
 #     && apt-get install -y --no-install-recommends build-essential
 
-# ENTRYPOINT ["sh", "/entrypoint.sh"]
-COPY entrypoint.sh /entrypoint.sh
+FROM python:3.7-alpine
 
-# Code file to execute when the docker container starts up (`entrypoint.sh`)
+ENV AWSCLI_VERSION='1.16.265'
+
+RUN pip install --quiet --no-cache-dir awscli==${AWSCLI_VERSION}
+ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
+
