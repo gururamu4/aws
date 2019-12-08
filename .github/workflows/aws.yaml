@@ -70,4 +70,3 @@ jobs:
           # be deployed to ECS.
             # docker run my-static-website-test
             docker build -t 'aws' .
-            bash ../../deploy.sh
