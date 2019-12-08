@@ -23,7 +23,7 @@ FROM mesosphere/aws-cli
 COPY --from=builder /my-static-app/dist .
 
 #Set the default command of this container to push the files from the working directory of this container to our s3 bucket 
-CMD ["s3", "sync", "./", "http://as-app.s3-website-us-east-1.amazonaws.com"]   
+# CMD ["s3", "sync", "./", "http://as-app.s3-website-us-east-1.amazonaws.com"]   
 
 ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
