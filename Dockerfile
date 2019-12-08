@@ -12,8 +12,9 @@ WORKDIR "/my-static-app"
 
 #Copying our package.json file from our local machine to the working directory inside the docker container.
 COPY package.json ./
+COPY entrypoint.sh ./
 
-RUN chmod +x ./entrypoint.sh
+RUN chmod +x .entrypoint.sh
 #Installing the dependencies listed in our package.json file.
 RUN npm install
 
