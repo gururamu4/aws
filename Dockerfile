@@ -10,7 +10,7 @@ COPY package.json ./
 #Installing the dependencies listed in our package.json file.
 RUN npm install
 
-RUN apt-get update && \
+RUN apk update && apk add && apt-get update && \
     apt-get install -y \
         python \
         python-dev \
