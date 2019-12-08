@@ -28,6 +28,6 @@ COPY --from=builder /my-static-app/dist .
 # RUN apt-get update \
 #     && apt-get install -y --no-install-recommends build-essential
 
-COPY ./entrypoint.sh .
-
-ENTRYPOINT ["/entrypoint.sh"]
+COPY entrypoint.sh /usr/local/bin/
+RUN ln -s /usr/local/bin/entrypoint.sh / # backwards compat
+ENTRYPOINT ["entrypoint.sh"]
