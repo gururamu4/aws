@@ -14,7 +14,7 @@ WORKDIR "/my-static-app"
 COPY package.json ./
 COPY entrypoint.sh ./
 
-RUN chmod +x .entrypoint.sh
+RUN chmod +x entrypoint.sh
 #Installing the dependencies listed in our package.json file.
 RUN npm install
 
