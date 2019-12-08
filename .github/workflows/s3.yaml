@@ -55,6 +55,7 @@ jobs:
         #   ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         #   ECR_REPOSITORY: dpa1
         #   IMAGE_TAG: ${{ github.sha }}
+#         shell: 'sh'
         env:
             AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -66,7 +67,7 @@ jobs:
           # push it to ECR so that it can
           # be deployed to ECS.
             #docker run my-static-website-test
-            docker build "../Dockerfile" -t aws:latest "."
+            docker build --f "../../Dockerfile" -t aws:latest "."
             bash ../../deploy.sh
         #   docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         #   docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
